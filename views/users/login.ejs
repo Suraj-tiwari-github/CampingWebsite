@@ -1,0 +1,27 @@
+<% layout('layouts/boilerplate')%>
+<div style="color:#fefae0; text-transform: capitalize; " class="text-center container col-6" >  
+<h1 class="mb-4">Login</h1>
+<form action="/login" method="POST" class="validated-form" novalidate>
+    <div class="mb-3">
+        <label class="form-label" for="validationServer01" style="font-size: 20px;">Username</label>
+        <input class="form-control is-valid" type="text" id="validationServer01" name="username" required>
+        <div class="invalid-feedback" style="font-size:medium; font-weight:bolder">
+            Username is required
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="validationServer02" style="font-size: 20px;">Password</label>
+        <input class="form-control is-valid" type="password" id="validationServer02" name="password" required>
+        <div class="invalid-feedback" style="font-size:medium; font-weight:bolder">
+            Enter your password
+        </div>
+        
+    </div>
+    <button class="btn btn-success">Login</button>
+</form>
+<div class="mt-3 row">
+    <h6>Not a user <a href="/register" class="btn btn-warning ml-3">Register</a></h6>
+    
+</div>
+</div>

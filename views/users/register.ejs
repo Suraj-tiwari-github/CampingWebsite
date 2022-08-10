@@ -1,0 +1,53 @@
+<% layout('layouts/boilerplate')%>
+<div
+  style="color: #fefae0; text-transform: capitalize"
+  class="text-center container col-6"
+>
+  <h1 class="mb-4">Register</h1>
+  <form action="/register" method="POST" class="validated-form" novalidate>
+    <div class="mb-3">
+      <label class="form-label" for="validationServer01">Username</label>
+      <input
+        class="form-control is-valid"
+        type="text"
+        id="validationServer01"
+        placeholder="Username only in Alphabets"
+        name="username"
+      />
+      <div class="invalid-feedback">Username only in Alphabets</div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="validationServer02">Email</label>
+      <input
+        class="form-control is-valid"
+        type="email"
+        id="validationServer02"
+        name="email"
+        required
+      />
+      <div
+        class="invalid-feedback"
+        style="font-size: medium; font-weight: bolder"
+      >
+        Please Enter a Valid Email Address
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="validationServer03">Password</label>
+      <input
+        class="form-control is-valid"
+        type="password"
+        id="validationServer03"
+        name="password"
+        required
+      />
+      <div
+        class="invalid-feedback"
+        style="font-size: medium; font-weight: bolder"
+      >
+        Please Enter your password
+      </div>
+    </div>
+    <button class="btn btn-success">Register</button>
+  </form>
+</div>
