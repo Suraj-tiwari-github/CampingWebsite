@@ -1,53 +1,78 @@
 <% layout('layouts/boilerplate')%>
-<div
-  style="color: #fefae0; text-transform: capitalize"
-  class="text-center container col-6"
->
-  <h1 class="mb-4">Register</h1>
-  <form action="/register" method="POST" class="validated-form" novalidate>
-    <div class="mb-3">
-      <label class="form-label" for="validationServer01">Username</label>
-      <input
-        class="form-control is-valid"
-        type="text"
-        id="validationServer01"
-        placeholder="Username only in Alphabets"
-        name="username"
-      />
-      <div class="invalid-feedback">Username only in Alphabets</div>
-    </div>
-    <div class="mb-3">
-      <label class="form-label" for="validationServer02">Email</label>
-      <input
-        class="form-control is-valid"
-        type="email"
-        id="validationServer02"
-        name="email"
-        required
-      />
-      <div
-        class="invalid-feedback"
-        style="font-size: medium; font-weight: bolder"
-      >
-        Please Enter a Valid Email Address
+<style>
+  #glass-object {
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 10%), 0 10px 15px rgb(0 0 0 / 20%);
+    box-sizing: border-box;
+    background-image: linear-gradient(
+      45deg,
+      rgba(66, 60, 90, 0.6),
+      rgba(66, 60, 90, 0.6)
+    );
+    width: 50%;
+    height: 100%;
+    mix-blend-mode: hard-light;
+    color:black;
+  }
+</style>
+<div class="container row">
+  <div class="col-6">
+  <img src="https://images.unsplash.com/photo-1510312305653-8ed496efae75?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80" alt="" class="img-fluid" style="border-radius: 25px;">
+</div>
+  <div style="text-transform: capitalize" class="text-center" id="glass-object">
+    <h1 class="mb-4">Register</h1>
+    <form action="/register" method="POST" class="validated-form" novalidate>
+      <div class="mb-3">
+        <label class="form-label" for="validationServer01">Username</label>
+        <input
+          class="form-control is-valid"
+          type="text"
+          style="background-color:black; color:rgb(239, 239, 141); font-size:large";
+          id="validationServer01"
+          placeholder="Username only in Alphabets"
+          name="username"
+          onkeypress="return (event.charCode > 64 && 
+event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+        />
+        <div class="invalid-feedback">Username only in Alphabets</div>
       </div>
-    </div>
-    <div class="mb-3">
-      <label class="form-label" for="validationServer03">Password</label>
-      <input
-        class="form-control is-valid"
-        type="password"
-        id="validationServer03"
-        name="password"
-        required
-      />
-      <div
-        class="invalid-feedback"
-        style="font-size: medium; font-weight: bolder"
-      >
-        Please Enter your password
+      <div class="mb-3">
+        <label class="form-label" for="validationServer02">Email</label>
+        <input
+          class="form-control is-valid"
+          type="email"
+          id="validationServer02"
+          name="email"
+          style="background-color:black; color:rgb(239, 239, 141); font-size:large"
+          required
+        />
+        <div
+          class="invalid-feedback"
+          style="font-size: medium; font-weight: bolder; color:rgb(112, 7, 7);"
+        >
+          Please Enter a Valid Email Address
+        </div>
       </div>
-    </div>
-    <button class="btn btn-success">Register</button>
-  </form>
+      <div class="mb-3">
+        <label class="form-label" for="validationServer03">Password</label>
+        <input
+          class="form-control is-valid"
+          type="password"
+          id="validationServer03"
+          name="password"
+          style="background-color:black; color:rgb(239, 239, 141); font-size:large"
+          required
+        />
+        <div
+          class="invalid-feedback"
+          style="font-size: medium; font-weight: bolder; color:rgb(112, 7, 7);"
+        >
+          Please Enter your password
+        </div>
+      </div>
+      <button class="btn btn-success" style="color:black;">Register</button>
+    </form>
+  </div>
 </div>

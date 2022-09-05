@@ -1,27 +1,54 @@
 <% layout('layouts/boilerplate')%>
-<div style="color:#fefae0; text-transform: capitalize; " class="text-center container col-6" >  
+
+<style>
+    
+    #glass-object {
+        border-radius: 25px;
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        box-shadow: 0 2px 10px rgb(0 0 0 / 10%), 0 10px 15px rgb(0 0 0 / 20%);
+        box-sizing: border-box;
+        background-image: linear-gradient(
+          45deg,
+          rgba(66, 60, 90, 0.6),
+          rgba(66, 60, 90, 0.6)
+        );
+        width: 50%;
+        height: 50%;
+        mix-blend-mode: hard-light;
+        color:black;
+      }
+
+      
+      /* url(https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80); */
+</style>
+<div class="container">
+<div class="row col-11">
+    <image src="https://images.unsplash.com/photo-1496545672447-f699b503d270?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80" class="image-fluid col-6" style="border-radius:30px;"></image>
+<div style=" text-transform: capitalize; " class="text-center col-5" id="glass-object">  
 <h1 class="mb-4">Login</h1>
 <form action="/login" method="POST" class="validated-form" novalidate>
     <div class="mb-3">
         <label class="form-label" for="validationServer01" style="font-size: 20px;">Username</label>
-        <input class="form-control is-valid" type="text" id="validationServer01" name="username" required>
-        <div class="invalid-feedback" style="font-size:medium; font-weight:bolder">
+        <input class="form-control is-valid" type="text" id="validationServer01" name="username" required style="background-color:black; color:whitesmoke ;font-size:large; font-weight: normal;">
+        <div class="invalid-feedback" style="font-size:medium; font-weight:bolder; color:rgb(112, 7, 7);">
             Username is required
         </div>
     </div>
 
     <div class="mb-3">
         <label class="form-label" for="validationServer02" style="font-size: 20px;">Password</label>
-        <input class="form-control is-valid" type="password" id="validationServer02" name="password" required>
-        <div class="invalid-feedback" style="font-size:medium; font-weight:bolder">
+        <input class="form-control is-valid" type="password" id="validationServer02" name="password" required style="background-color:black; color: whitesmoke; font-size:large;">
+        <div class="invalid-feedback" style="font-size:medium; font-weight:bolder; color:rgb(112, 7, 7);">
             Enter your password
         </div>
         
     </div>
-    <button class="btn btn-success">Login</button>
+    <button class="btn btn-success" style="color:black;">Login</button>
 </form>
 <div class="mt-3 row">
-    <h6>Not a user <a href="/register" class="btn btn-warning ml-3">Register</a></h6>
+    <h6>Not a user <a href="/register" class="btn btn-warning ml-3" style="color:black;">Register</a></h6>
     
+</div>
 </div>
 </div>

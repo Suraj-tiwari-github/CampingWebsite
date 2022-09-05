@@ -10,13 +10,18 @@
                 <a class="nav-link" href="/campgrounds">Home</a>
                 <a class="nav-link" href="/campgrounds">All Camps</a>
                 <a class="nav-link" href="/campgrounds/new">Add your Camp</a>
+                <a class="nav-link" href="/about">About</a>
+                <a class="nav-link" href="/contact">Contact us</a>
+                
+
+                
             </div>
             <div class="navbar-nav ml-auto">
                 <% if(!currentUser) {%>
                 <a class="nav-link" href="/login">Login</a>
                 <a class="nav-link" href="/register">Register</a>
                 <% } else {%>
-                <a class="nav-link" href="/logout">Logout</a>
+                <a class="nav-link" href="/logout">(Log in As <%=currentUser.username %>)    Logout</a>
                 <% } %>
             </div>
         </div>

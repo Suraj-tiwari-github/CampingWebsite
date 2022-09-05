@@ -1,3 +1,4 @@
+//* Require the campground and reviwews
 const Campground = require('../models/campground');
 const Review = require('../models/review');
 

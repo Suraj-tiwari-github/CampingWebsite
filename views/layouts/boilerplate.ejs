@@ -1,35 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Camping</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-        <style>
-body {
-  background-image: url('https://images.unsplash.com/photo-1487730116645-74489c95b41b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
-}
-</style>
-</head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap"
+      rel="stylesheet"
+    />
 
-<body class="d-flex flex-column vh-100">
+   
+
+    <!-- <style>
+         body{
+            background-image: url(https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80);
+        }
+    </style> -->
+      <style>
+      body {
+        margin: auto;
+        font-family: "Open Sans", sans-serif;
+        overflow: auto;
+        background: linear-gradient(
+          315deg,
+          rgb(230, 131, 151) 3%,
+          rgba(254, 222, 173, 1),
+          rgb(87, 175, 247) 38%,
+          rgb(199, 251, 215) 68%,
+          rgb(241 , 250, 238) 98%,
+          rgb(246,170,28)
+        );
+        animation: gradient 40s ease infinite;
+        background-size: 400% 400%;
+        background-attachment: fixed;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 0%;
+        }
+        50% {
+          background-position: 100% 100%;
+        }
+        100% {
+          background-position: 0% 0%;
+        }
+      }
+
+      .wave {
+        background: rgb(255 255 255 / 25%);
+        border-radius: 1000% 1000% 0 0;
+        position: fixed;
+        width: 200%;
+        height: 12em;
+        animation: wave 10s -3s linear infinite;
+        transform: translate3d(0, 0, 0);
+        opacity: 0.8;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      .wave:nth-of-type(2) {
+        bottom: -1.25em;
+        animation: wave 18s linear reverse infinite;
+        opacity: 0.8;
+      }
+
+      .wave:nth-of-type(3) {
+        bottom: -2.5em;
+        animation: wave 20s -1s reverse infinite;
+        opacity: 0.9;
+      }
+
+      @keyframes wave {
+        2% {
+          transform: translateX(1);
+        }
+
+        25% {
+          transform: translateX(-25%);
+        }
+
+        50% {
+          transform: translateX(-50%);
+        }
+
+        75% {
+          transform: translateX(-25%);
+        }
+
+        100% {
+          transform: translateX(1);
+        }
+      }
+    </style> 
+
+
+  </head>
+  <body class="d-flex flex-column vh-100">
     <%- include('../partials/navbar')%>
     <main class="container mt-5">
-        <%- include('../partials/flash')%>
-        <%- body %>
+      <%- include('../partials/flash')%> <%- body %>
     </main>
     <%- include('../partials/footer')%>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+      crossorigin="anonymous"
+    ></script>
 
-    <script src='/javascripts/validateForms.js'></script>
-</body>
-
+    <script src="/javascripts/validateForms.js"></script>
+  </body>
 </html>

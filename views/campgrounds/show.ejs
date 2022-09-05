@@ -1,90 +1,309 @@
 <% layout('layouts/boilerplate')%>
-<link rel="stylesheet" href="/stylesheets/stars.css">
+<link rel="stylesheet" href="/stylesheets/stars.css" />
+<link rel="stylesheet" href="./weather.css" />
+
+<style>
+  #glass-object {
+    border-radius: 25px;
+    backdrop-filter: blur(23.8px);
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 10%), 0 10px 15px rgb(0 0 0 / 20%);
+    box-sizing: border-box;
+    background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.2)
+    );
+    width: 100%;
+    min-height: 70px;
+    mix-blend-mode: hard-light;
+    color: black;
+  }
+
+  #text-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #glass-container {
+    position: relative;
+    width: 100%;
+    height: 80px;
+  }
+</style>
+<script src="./weather.js"></script>
 
 <div class="row">
-    <div class="col-6">
-        <h5 style="color:#fefae0; text-transform: capitalize;">Camp Owner : <%= campground.author.username%></h5>
-        <div class="card mb-3" style="color:#14213d;">
-            <img src="<%= campground.image%>" class="card-img-top" alt="...">
-            <div class="card-body" >
-                <h5 class="card-title"><%= campground.title%></h5>
-                <p class="card-text"><%= campground.description%></p>
-            </div>
-            <ul class="list-group list-group-flush" >
-                <li class="list-group-item text-muted"><%= campground.location%></li>
-                <li class="list-group-item" style="text-transform:capitalize;">Submitted by <%= campground.author.username%></li>
-                <li class="list-group-item">$<%= campground.price%>/Day</li>
-                <li class="list-group-item">Call us now : <a href="tel:123-456-7890">9966-898917</a></li>
-                <li class="list-group-item">Send us a Mail : <a href = "mailto: abc@example.com">Send Email</a></li>
-
-            </ul>
-            <%  if( currentUser && campground.author.equals(currentUser._id))  {%>
-            <div class="card-body">
-                <a class="card-link btn btn-info" href="/campgrounds/<%=campground._id%>/edit">Edit</a>
-                <form class="d-inline" action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
-                    <button class="btn btn-danger">Delete</button>
-                </form>
-            </div>
-            <% } %>
-            <div class="card-footer text-muted">
-                2 days ago
-            </div>
-
-            
-        </div>
-        <div class="">
-                <a href="./index.ejs" class="btn btn-success">Book now</a>
-            </div>
-
+  <div class="col-6">
+    <h4 style="text-transform: capitalize">
+      Camp Owner : <%= campground.author.username%>
+    </h4>
+    <div class="card mb-3">
+      <img src="<%= campground.image%>" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title"><%= campground.title%></h5>
+        <p class="card-text"><%= campground.description%></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item text-muted"><%= campground.location%></li>
+        <li class="list-group-item" style="text-transform: capitalize">
+          Submitted by <%= campground.author.username%>
+        </li>
+        <li class="list-group-item">&#8377; <%= campground.price%>/Day</li>
+        <li class="list-group-item">
+          Call us now : <a href="tel:123-456-7890">9966-898917</a>
+        </li>
+        <li class="list-group-item">
+          Send us a Mail : <a href="mailto: abc@example.com">Send Email</a>
+        </li>
+      </ul>
+      <% if( currentUser && campground.author.equals(currentUser._id)) {%>
+      <div class="card-body">
+        <a
+          class="card-link btn btn-info"
+          href="/campgrounds/<%=campground._id%>/edit"
+          >Edit</a
+        >
+        <form
+          class="d-inline"
+          action="/campgrounds/<%=campground._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+      <% } %>
+      <div class="card-footer text-muted">2 days ago</div>
     </div>
-    <div class="col-6" >
-        <% if(currentUser){ %>
-        <h2 style="color:#fefae0;">Leave a Review</h2>
-        <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
-            <!-- <div class="mb-3">
+    <div class="">
+      <a
+        href="/campgrounds/<%=campground._id %>/checkout"
+        class="btn btn-success"
+        >Book now</a
+      >
+    </div>
+  </div>
+  
+<!-- !weather api -->
+  <div class="col-6">
+    
+    <div
+      class="card-body mb-3"
+      style="
+        background: #000000d0;
+        color: white;
+        padding: 2em;
+        border-radius: 30px;
+        width: 100%;
+        max-width: 420px;
+        margin: 1em;
+        font-family: 'Open Sans', sans-serif;
+        background: #000000d0;
+        font-size: 120%;
+      "
+    >
+      <div
+        class="search"
+        style="display: flex; align-items: center; justify-content: center"
+      >
+        <input
+          type="text"
+          class="search-bar"
+          placeholder="Search City"
+          value="<%=campground.location %>"
+          style="
+            border: none;
+            outline: none;
+            padding: 0.4em 1em;
+            border-radius: 24px;
+            background: #7c7c7c2b;
+            color: white;
+            font-family: inherit;
+            font-size: 105%;
+            width: calc(100% - 50px);
+          "
+        />
+        <button
+          class="weatherbutton"
+          style="
+            margin: 0.5em;
+            border-radius: 50%;
+            border: none;
+            height: 44px;
+            width: 44px;
+            outline: none;
+            background: #7c7c7c2b;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+          "
+        >
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            height="1.5em"
+            width="1.5em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <div class="weather loading">
+        <h2 class="city">Weather in <%=campground.location %></h2>
+        <h1 class="temp" style="margin: 0; margin-bottom: 0.4em">25.73°C</h1>
+        <div class="weatherflex" style="display: flex; align-items: center">
+          <img
+            src="https://openweathermap.org/img/wn/04n.png"
+            alt=""
+            class="icon"
+          />
+          <div class="weatherdescription">Cloudy</div>
+        </div>
+        <div class="humidity">Humidity: 60%</div>
+        <div class="wind">Wind speed: 6.2 km/h</div>
+      </div>
+    </div>
+
+    <!-- Open weathe map api-->
+    <script>
+      let weather = {
+        apiKey: "74abfdc63802181b91899140ed2992eb",
+        fetchWeather: function (city) {
+          fetch(
+            "https://api.openweathermap.org/data/2.5/weather?q=" +
+              city +
+              "&units=metric&appid=" +
+              this.apiKey
+          )
+            .then((response) => {
+              if (!response.ok) {
+                alert("No weather found.");
+                throw new Error("No weather found.");
+              }
+              return response.json();
+            })
+            .then((data) => this.displayWeather(data));
+        },
+        displayWeather: function (data) {
+          const { name } = data;
+          const { icon, description } = data.weather[0];
+          const { temp, humidity } = data.main;
+          const { speed } = data.wind;
+          document.querySelector(".city").innerText = "Weather in " + name;
+          document.querySelector(".icon").src =
+            "https://openweathermap.org/img/wn/" + icon + ".png";
+          document.querySelector(".weatherdescription").innerText = description;
+          document.querySelector(".temp").innerText = temp + "°C";
+          document.querySelector(".humidity").innerText =
+            "Humidity: " + humidity + "%";
+          document.querySelector(".wind").innerText =
+            "Wind speed: " + speed + " km/h";
+          document.querySelector(".weather").classList.remove("loading");
+        },
+        search: function () {
+          this.fetchWeather(document.querySelector(".search-bar").value);
+        },
+      };
+
+      document
+        .querySelector(".search button")
+        .addEventListener("click", function () {
+          weather.search();
+        });
+
+      document
+        .querySelector(".search-bar")
+        .addEventListener("keyup", function (event) {
+          if (event.key == "Enter") {
+            weather.search();
+          }
+        });
+    </script>
+
+    <% if(currentUser){ %>
+    <h2 class="ml-3">Leave a Review</h2>
+    <form
+      action="/campgrounds/<%=campground._id%>/reviews"
+      method="POST"
+      class="mb-3 ml-3 validated-form"
+      novalidate
+    >
+      <!-- <div class="mb-3">
                 <label class="form-label" for="rating">Rating</label>
                 <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
             </div> -->
-            <fieldset class="starability-basic">
-                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
-                    aria-label="No rating." />
-                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-                <label for="first-rate1" title="Terrible">1 star</label>
-                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-                <label for="first-rate2" title="Not good">2 stars</label>
-                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-                <label for="first-rate3" title="Average">3 stars</label>
-                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-                <label for="first-rate4" title="Very good">4 stars</label>
-                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-                <label for="first-rate5" title="Amazing">5 stars</label>
-            </fieldset>
-            <div class="mb-3">
-                <label class="form-label" for="body" style="color:#fefae0;">Review Text</label>
-                <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
-            </div>
-            <button class="btn btn-success">Submit</button>
+      <fieldset class="starability-basic">
+        <input
+          type="radio"
+          id="no-rate"
+          class="input-no-rate"
+          name="review[rating]"
+          value="1"
+          checked
+          aria-label="No rating."
+        />
+        <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+        <label for="first-rate1" title="Terrible">1 star</label>
+        <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+        <label for="first-rate2" title="Not good">2 stars</label>
+        <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+        <label for="first-rate3" title="Average">3 stars</label>
+        <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+        <label for="first-rate4" title="Very good">4 stars</label>
+        <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+        <label for="first-rate5" title="Amazing">5 stars</label>
+      </fieldset>
+      <div class="mb-3">
+        <label class="form-label" for="body"
+          >Review Text</label
+        >
+        <textarea
+          class="form-control"
+          name="review[body]"
+          id="body"
+          cols="30"
+          rows="3"
+          required
+        ></textarea>
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+      <button class="btn btn-success">Submit</button>
+    </form>
+    <% } %> <% for(let review of campground.reviews) { %>
+    <div
+      class="card mb-3"
+      
+      style="color: black; font-size: 110%"
+    >
+      <div class="card-body">
+        <h4 class="card-title" style="text-transform: capitalize">
+          <%= review.author.username%>
+        </h4>
+        <p class="starability-result" data-rating="<%=review.rating%>">
+          Rated: <%= review.rating %> stars
+        </p>
+        <!-- <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username%></h6> -->
+        <p class="card-text">Review: <%= review.body %></p>
+        <% if( currentUser && review.author.equals(currentUser._id)) {%>
+        <form
+          action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-sm btn-danger">Delete</button>
         </form>
         <% } %>
-        <% for(let review of campground.reviews) { %>
-        <div class="card mb-3 ">
-            <div class="card-body">
-                <h5 class="card-title" style="text-transform: capitalize;"> <%= review.author.username%></h5>
-                <p class="starability-result" data-rating="<%=review.rating%>">
-                    Rated: <%= review.rating %> stars
-                </p>
-                <!-- <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username%></h6> -->
-                <p class="card-text">Review: <%= review.body %></p>
-                <%  if( currentUser && review.author.equals(currentUser._id))  {%>
-                <form action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
-                    <button class="btn btn-sm btn-danger">Delete</button>
-                </form>
-                <% } %>
-            </div>
-        </div>
-        <% } %>
+      </div>
     </div>
+    <% } %>
+  </div>
 </div>
